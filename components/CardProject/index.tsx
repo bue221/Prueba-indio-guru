@@ -38,7 +38,7 @@ const CardProject = ({
             <strong>Bono de hasta </strong> {formatterCop.format(BonoCasa)}
           </Typography>
         </Stack>
-        {/* <SliderImages images={galeria} /> */}
+        <SliderImages images={galeria} />
         <Stack py="43px" px="22px" gap={1} position="relative">
           <Box sx={styles.cardCircleHouse}>
             <Box
