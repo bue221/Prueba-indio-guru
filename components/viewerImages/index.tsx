@@ -8,11 +8,7 @@ import SwipeableViews from "react-swipeable-views";
 
 import { images as imagesDefault } from "./images";
 
-function SwipeableTextMobileStepper({
-  images = imagesDefault,
-}: {
-  images: string[];
-}) {
+function ViewerImages({ images = imagesDefault }: { images: string[] }) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = images.length;
@@ -114,4 +110,4 @@ function SwipeableTextMobileStepper({
   );
 }
 
-export default SwipeableTextMobileStepper;
+export default ViewerImages;
