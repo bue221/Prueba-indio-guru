@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useTheme, Button, Box } from "@mui/material";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
-// import SwipeableViews from "react-swipeable-views";
+import SwipeableViews from "react-swipeable-views";
 
-function ViewerImages({ images }: { images: string[] }) {
+const SliderImages = ({ images }: { images: string[] }) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = images.length;
@@ -22,7 +22,7 @@ function ViewerImages({ images }: { images: string[] }) {
 
   return (
     <Box sx={{ maxWidth: 400, flexGrow: 1, position: "relative" }}>
-      {/* <SwipeableViews
+      <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
@@ -60,7 +60,7 @@ function ViewerImages({ images }: { images: string[] }) {
             </div>
           ))
         )}
-      </SwipeableViews> */}
+      </SwipeableViews>
       <Box color="#FFFFFF">
         <Box
           display="flex"
@@ -103,6 +103,6 @@ function ViewerImages({ images }: { images: string[] }) {
       </Box>
     </Box>
   );
-}
+};
 
-export default ViewerImages;
+export default SliderImages;

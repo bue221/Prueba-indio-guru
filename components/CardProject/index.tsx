@@ -4,7 +4,7 @@ import { Stack, Paper, Typography, Button, Box } from "@mui/material";
 import mock from "utility/mock-api.json";
 import { formatterCop } from "utility/formatCurrency";
 import { useStyles } from "./styles";
-import ViewerImages from "../ViewerImages/index";
+import SliderImages from "components/ViewerImages";
 
 const CardProject = ({
   Nombre,
@@ -38,7 +38,7 @@ const CardProject = ({
             <strong>Bono de hasta </strong> {formatterCop.format(BonoCasa)}
           </Typography>
         </Stack>
-        <ViewerImages images={galeria} />
+        <SliderImages images={galeria} />
         <Stack py="43px" px="22px" gap={1} position="relative">
           <Box sx={styles.cardCircleHouse}>
             <Box
