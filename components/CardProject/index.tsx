@@ -4,7 +4,7 @@ import { Stack, Paper, Typography, Button, Box } from "@mui/material";
 import mock from "utility/mock-api.json";
 import { formatterCop } from "utility/formatCurrency";
 import { useStyles } from "./styles";
-import ViewerImages from "../ViewerImages";
+import ViewerImages from "../ViewerImages/index";
 
 const CardProject = ({
   Nombre,
