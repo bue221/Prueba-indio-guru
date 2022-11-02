@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import MobileStepper from "@mui/material/MobileStepper";
 import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
@@ -38,25 +37,38 @@ function SwipeableTextMobileStepper({
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {images.map((img, index) => (
-          <div key={index}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <Box
-                component="img"
-                sx={{
-                  height: 255,
-                  display: "block",
-                  maxWidth: 400,
-                  overflow: "hidden",
-                  width: "100%",
-                  borderRadius: "26px 26px 0px 0px",
-                }}
-                src={`/assets/imagesProjects/${img}`}
-                alt={img}
-              />
-            ) : null}
-          </div>
-        ))}
+        {images?.length === 0 ? (
+          <Box
+            key={0}
+            component="img"
+            height={255}
+            display="block"
+            maxWidth={400}
+            overflow="hidden"
+            width="100%"
+            borderRadius="26px 26px 0px 0px"
+            src="/assets/imagesProjects/boreal-galeria-3.jpg"
+            alt={"alcala-render-1.jpg"}
+          />
+        ) : (
+          images?.map((img, index) => (
+            <div key={index}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <Box
+                  component="img"
+                  height={255}
+                  display="block"
+                  maxWidth={400}
+                  overflow="hidden"
+                  width="100%"
+                  borderRadius="26px 26px 0px 0px"
+                  src={`/assets/imagesProjects/${img}`}
+                  alt={img}
+                />
+              ) : null}
+            </div>
+          ))
+        )}
       </SwipeableViews>
       <Box color="#FFFFFF">
         <Box
