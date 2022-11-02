@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import CustomSelect from "components/CustomSelect";
 import Footer from "components/Footer";
 import WhatsappButton from "components/WhatsappButton";
+import { motion } from "framer-motion";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -191,7 +192,14 @@ const Home: NextPage = () => {
         gap="35px"
       >
         {projects.map((i, index) => (
-          <CardProject {...i} key={index} />
+          <motion.div
+            key={index}
+            initial={{ opacity: 0.2, transitionDuration: "0.5s" }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <CardProject {...i} />
+          </motion.div>
         ))}
       </Stack>
       <Footer />
