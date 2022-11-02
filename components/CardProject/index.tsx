@@ -6,6 +6,12 @@ import { formatterCop } from "utility/formatCurrency";
 import { useStyles } from "./styles";
 import SliderImages from "components/ViewerImages";
 
+type TMain = typeof mock.Proyectos[0];
+
+interface IProps {
+  setOpen: any;
+}
+
 const CardProject = ({
   Nombre,
   Ciudad,
@@ -15,7 +21,8 @@ const CardProject = ({
   logo,
   BonoCasa,
   galeria,
-}: typeof mock.Proyectos[0]) => {
+  setOpen,
+}: TMain & IProps) => {
   const styles = useStyles();
 
   return (
@@ -83,7 +90,12 @@ const CardProject = ({
           right="13px"
         />
       </Paper>
-      <Button variant="contained" color="secondary" sx={styles.requestBtn}>
+      <Button
+        onClick={() => setOpen(Nombre)}
+        variant="contained"
+        color="secondary"
+        sx={styles.requestBtn}
+      >
         SOLICITAR COTIZACIÓN
       </Button>
     </Stack>

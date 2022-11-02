@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Dialog, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import CustomSelect from "components/CustomSelect";
 import Footer from "components/Footer";
@@ -14,6 +14,7 @@ import mock from "../utility/mock-api.json";
 
 const Home: NextPage = () => {
   //state
+  const [open, setOpen] = useState(false);
   const [projects, setProjects] = useState<typeof mock.Proyectos>(
     mock.Proyectos
   );
@@ -198,10 +199,21 @@ const Home: NextPage = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <CardProject {...i} />
+            <CardProject
+              {...i}
+              setOpen={(nombre: string) => {
+                setOpen(true);
+                console.log(nombre);
+              }}
+            />
           </motion.div>
         ))}
       </Stack>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <Stack height="70vh" width="100vw">
+          <h1>Hi</h1>
+        </Stack>
+      </Dialog>
       <Footer />
       <WhatsappButton />
     </Stack>
