@@ -1,9 +1,10 @@
 import React from "react";
 import { Stack, Paper, Typography, Button, Box } from "@mui/material";
-import SwipeableTextMobileStepper from "components/ViewerImages";
+
 import mock from "utility/mock-api.json";
 import { formatterCop } from "utility/formatCurrency";
 import { useStyles } from "./styles";
+import SwipeableTextMobileStepper from "components/ViewerImages";
 
 const CardProject = ({
   Nombre,
