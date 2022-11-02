@@ -1,4 +1,13 @@
-import { Button, Dialog, Stack, Typography } from "@mui/material";
+import { Close } from "@mui/icons-material";
+import {
+  Button,
+  Dialog,
+  Grid,
+  IconButton,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import CustomSelect from "components/CustomSelect";
 import Footer from "components/Footer";
@@ -209,9 +218,86 @@ const Home: NextPage = () => {
           </motion.div>
         ))}
       </Stack>
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        <Stack height="70vh" width="100vw">
-          <h1>Hi</h1>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        maxWidth="md"
+        fullWidth
+      >
+        <Stack height="70vh" width="100%" position="relative">
+          <Grid container height="100%">
+            <Grid item xs={6} sx={{ background: "white", height: "100%" }}>
+              <Stack
+                textAlign="center"
+                justifyContent="center"
+                alignItems="center"
+                height="100%"
+                gap={2}
+                position="relative"
+              >
+                <Box
+                  width={220}
+                  component="img"
+                  src="/assets/Recursos web/casafestamarillo.png"
+                />
+                <Typography fontSize={20}>
+                  COMPLETA YA ESTE FORMULARIO PARA SOLICITAR INFORMACIÓN DEL
+                  <strong>INMUEBLE DE TUS SUEÑOS</strong>.
+                </Typography>
+                <Box
+                  position="absolute"
+                  bottom="2em"
+                  right="0px"
+                  sx={{
+                    background: "#FFCC01",
+                    borderRadius: "36px 0px 0px 36px",
+                    py: "20px",
+                    px: "10px",
+                  }}
+                >
+                  <Stack direction="row" alignItems="center" gap={2}>
+                    <Box
+                      component="img"
+                      src="/assets/Recursos web/telefono.png"
+                      width={20}
+                    />
+                    <Typography fontSize="20px">601 6340000</Typography>
+                  </Stack>
+                </Box>
+              </Stack>
+            </Grid>
+            <Grid item xs={6} sx={{ background: "#FFCC01", height: "100%" }}>
+              <Stack
+                px="50px"
+                py="34px"
+                justifyContent="center"
+                alignItems="center"
+                height="100%"
+              >
+                <Stack gap={2} mb={2}>
+                  <TextField />
+                  <TextField />
+                  <TextField />
+                  <TextField />
+                  <TextField />
+                </Stack>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{ color: "primary.main" }}
+                  onClick={() => router.push("/thanks")}
+                >
+                  Solicitar
+                </Button>
+              </Stack>
+            </Grid>
+          </Grid>
+          <IconButton
+            onClick={() => setOpen(false)}
+            sx={{ position: "absolute", top: 0, right: 0, color: "black" }}
+          >
+            <Close fontSize="large" />
+          </IconButton>
         </Stack>
       </Dialog>
       <Footer />
