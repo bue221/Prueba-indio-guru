@@ -1182,24 +1182,6 @@
       ]
     },
     {
-      "Nombre": "UNICENTRO DE OCCIDENTE",
-      "Ciudad": "Bogota",
-      "FiltroCiudad": "Bogotá",
-      "NombreOcultoForm": "Unicentro de Occidente",
-      "TipoProyecto": "Empresarial",
-      "Ingresos": "10 millones",
-      "Habitaciones": "N/A",
-      "Categoria": "N/A",
-      "Precio": 881496000,
-      "FiltroPrecio": "$501.000.000 - $900.000.000 COP",
-      "AreaDesde": 138,
-      "AreaHasta": "N/A",
-      "FiltroArea": "Más de 101m2",
-      "BonoCasa": 350000000,
-      "logo": "",
-      "galeria": []
-    },
-    {
       "Nombre": "CC PRADO VERDE",
       "Ciudad": "Soacha",
       "FiltroCiudad": "Sabana de Bogotá (Cajicá, Chía, Cota, Guasca, Madrid)",

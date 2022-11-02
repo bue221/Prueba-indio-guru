@@ -1,21 +1,106 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import CustomSelect from "components/CustomSelect";
 import Footer from "components/Footer";
 import WhatsappButton from "components/WhatsappButton";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useState } from "react";
 import CardProject from "../components/CardProject";
 
 import mock from "../utility/mock-api.json";
 
 const Home: NextPage = () => {
+  //state
+  const [projects, setProjects] = useState<typeof mock.Proyectos>(
+    mock.Proyectos
+  );
+  const [form, setForm] = useState({
+    ciudades: " ",
+    precios: " ",
+    areas: " ",
+    tipos: " ",
+  });
+  const handleChange = (e: any) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  // filters values
+  const ciudades = mock.Proyectos.map((i) => i.FiltroCiudad).filter(
+    (i, index) => mock.Proyectos.map((i) => i.FiltroCiudad).indexOf(i) === index
+  );
+  const precios = mock.Proyectos.map((i) => i.FiltroPrecio).filter(
+    (i, index) => mock.Proyectos.map((i) => i.FiltroPrecio).indexOf(i) === index
+  );
+  const areas = mock.Proyectos.map((i) => i.FiltroArea).filter(
+    (i, index) => mock.Proyectos.map((i) => i.FiltroArea).indexOf(i) === index
+  );
+  const tipos = mock.Proyectos.map((i) => i.TipoProyecto).filter(
+    (i, index) => mock.Proyectos.map((i) => i.TipoProyecto).indexOf(i) === index
+  );
+  //logic
+  const router = useRouter();
+
+  const handleSearch = () => {
+    let data = mock.Proyectos;
+
+    if (form.ciudades !== " ") {
+      data = data.filter((i) => i.FiltroCiudad === form.ciudades);
+    }
+    if (form.tipos !== " ") {
+      data = data.filter((i) => i.TipoProyecto === form.tipos);
+    }
+    if (form.precios !== " ") {
+      data = data.filter((i) => i.FiltroPrecio === form.precios);
+    }
+    if (form.areas !== " ") {
+      data = data.filter((i) => i.FiltroArea === form.areas);
+    }
+    router.replace({
+      query: {
+        ...router.query,
+        area: form.areas !== " " ? form.areas : "",
+        precio: form.precios !== " " ? form.precios : "",
+        tipo: form.tipos !== " " ? form.tipos : "",
+        ciudad: form.ciudades !== " " ? form.ciudades : "",
+      },
+    });
+
+    setProjects(data);
+  };
+
+  // logic url params
+  useEffect(() => {
+    if (router && router.query) {
+      const { area, precio, tipo, ciudad } = router.query;
+      if (area || precio || tipo || ciudad) {
+        let data = mock.Proyectos;
+        console.log(data, area, precio, tipo, ciudad);
+        if (ciudad && ciudad !== "") {
+          data = data.filter((i) => i.FiltroCiudad === ciudad);
+        }
+        if (tipo && tipo !== "") {
+          data = data.filter((i) => i.TipoProyecto === tipo);
+        }
+        if (precio && precio !== "") {
+          data = data.filter((i) => i.FiltroPrecio === precio);
+        }
+        if (area && area !== "") {
+          data = data.filter((i) => i.FiltroArea === area);
+        }
+        setForm({
+          ...form,
+          areas: area !== "" ? (area as string) : " ",
+          precios: precio !== "" ? (precio as string) : " ",
+          ciudades: ciudad !== "" ? (ciudad as string) : " ",
+          tipos: tipo !== "" ? (tipo as string) : " ",
+        });
+        setProjects(data);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query]);
+
   return (
     <Stack position="relative">
       <Stack
@@ -52,91 +137,48 @@ const Home: NextPage = () => {
         </Typography>
         <Stack direction={{ xs: "column", lg: "row" }} gap={2} mb={2}>
           <Stack gap={2}>
-            <FormControl sx={{ width: 270 }}>
-              <InputLabel id="demo-simple-select-label">Ciudad</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Ciudad"
-                startAdornment={
-                  <Box
-                    component="img"
-                    width={20}
-                    height={20}
-                    src="/assets/Recursos web/ciudad.png"
-                  />
-                }
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Tipo</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Tipo"
-                startAdornment={
-                  <Box
-                    component="img"
-                    width={20}
-                    height={20}
-                    src="/assets/Recursos web/tipo.png"
-                  />
-                }
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
+            <CustomSelect
+              name="ciudades"
+              onChange={handleChange}
+              value={form.ciudades}
+              iconStart="ciudad.png"
+              items={ciudades}
+              label="Ciudad"
+            />
+            <CustomSelect
+              name="tipos"
+              onChange={handleChange}
+              value={form.tipos}
+              iconStart="tipo.png"
+              items={tipos}
+              label="Tipo"
+            />
           </Stack>
           <Stack gap={2}>
-            <FormControl sx={{ width: 270 }}>
-              <InputLabel id="demo-simple-select-label">Área</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="área"
-                startAdornment={
-                  <Box
-                    component="img"
-                    width={20}
-                    height={20}
-                    src="/assets/Recursos web/area.png"
-                  />
-                }
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Valor</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Valor"
-                startAdornment={
-                  <Box
-                    component="img"
-                    width={20}
-                    height={20}
-                    src="/assets/Recursos web/valor.png"
-                  />
-                }
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
+            <CustomSelect
+              name="areas"
+              onChange={handleChange}
+              value={form.areas}
+              iconStart="area.png"
+              items={areas}
+              label="Área"
+            />
+            <CustomSelect
+              name="precios"
+              value={form.precios}
+              onChange={handleChange}
+              iconStart="valor.png"
+              items={precios}
+              label="Valor"
+            />
           </Stack>
         </Stack>
-        <Button variant="contained" color="primary" sx={{ width: "221px   " }}>
+        <Button
+          onClick={handleSearch}
+          variant="contained"
+          color="primary"
+          sx={{ width: "221px   " }}
+        >
           Buscar
         </Button>
       </Stack>
@@ -148,7 +190,7 @@ const Home: NextPage = () => {
         alignItems="center"
         gap="35px"
       >
-        {mock.Proyectos.map((i, index) => (
+        {projects.map((i, index) => (
           <CardProject {...i} key={index} />
         ))}
       </Stack>
