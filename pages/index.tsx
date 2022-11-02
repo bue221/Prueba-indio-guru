@@ -8,10 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import Footer from "components/Footer";
-import WhatsappButton from "components/WhatsappButton";
+import Footer from "Components/Footer";
+import WhatsappButton from "Components/WhatsappButton";
 import type { NextPage } from "next";
-import CardProject from "../components/CardProject";
+import CardProject from "../Components/CardProject";
 
 import mock from "../utility/mock-api.json";
 
