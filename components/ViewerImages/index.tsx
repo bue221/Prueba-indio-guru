@@ -2,6 +2,7 @@ import * as React from "react";
 import { useTheme, Button, Box } from "@mui/material";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import SwipeableViews from "react-swipeable-views";
+
 const SliderImages = ({ images }: { images: string[] }) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -24,43 +25,25 @@ const SliderImages = ({ images }: { images: string[] }) => {
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {" "}
-        {images?.length === 0 ? (
-          <Box
-            key={0}
-            component="img"
-            height={255}
-            display="block"
-            maxWidth={400}
-            overflow="hidden"
-            width="100%"
-            borderRadius="26px 26px 0px 0px"
-            src="/assets/imagesProjects/boreal-galeria-3.jpg"
-            alt={"alcala-render-1.jpg"}
-          />
-        ) : (
-          images?.map((img, index) => (
-            <div key={index}>
-              {" "}
-              {Math.abs(activeStep - index) <= 2 ? (
-                <Box
-                  component="img"
-                  height={255}
-                  display="block"
-                  maxWidth={400}
-                  overflow="hidden"
-                  width="100%"
-                  borderRadius="26px 26px 0px 0px"
-                  src={`/assets/imagesProjects/${img}`}
-                  alt={img}
-                />
-              ) : null}{" "}
-            </div>
-          ))
-        )}{" "}
-      </SwipeableViews>{" "}
+        {images?.map((img, index) => (
+          <div key={index}>
+            {Math.abs(activeStep - index) <= 2 ? (
+              <Box
+                component="img"
+                height={255}
+                display="block"
+                maxWidth={400}
+                overflow="hidden"
+                width="100%"
+                borderRadius="26px 26px 0px 0px"
+                src={`/assets/imagesProjects/${img}`}
+                alt={img}
+              />
+            ) : null}
+          </div>
+        ))}
+      </SwipeableViews>
       <Box color="#FFFFFF">
-        {" "}
         <Box
           display="flex"
           justifyContent="center"
@@ -72,16 +55,14 @@ const SliderImages = ({ images }: { images: string[] }) => {
           margin="0px auto"
           zIndex={100}
         >
-          {" "}
           <Button onClick={handleBack} disabled={activeStep === 0}>
-            {" "}
             {theme.direction === "rtl" ? (
               <KeyboardArrowRight fontSize="large" />
             ) : (
               <KeyboardArrowLeft fontSize="large" />
-            )}{" "}
-          </Button>{" "}
-        </Box>{" "}
+            )}
+          </Button>
+        </Box>
         <Box
           display="flex"
           justifyContent="center"
@@ -93,17 +74,15 @@ const SliderImages = ({ images }: { images: string[] }) => {
           margin="0px auto"
           zIndex={100}
         >
-          {" "}
           <Button onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-            {" "}
             {theme.direction === "rtl" ? (
               <KeyboardArrowLeft fontSize="large" />
             ) : (
               <KeyboardArrowRight fontSize="large" />
-            )}{" "}
-          </Button>{" "}
-        </Box>{" "}
-      </Box>{" "}
+            )}
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 };

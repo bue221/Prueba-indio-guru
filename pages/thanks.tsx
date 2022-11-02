@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, Box, Grid, Typography, Button } from "@mui/material";
-import Footer from "Components/Footer";
-import WhatsappButton from "Components/WhatsappButton";
+import Footer from "components/Footer";
+import WhatsappButton from "components/WhatsappButton";
 import { useRouter } from "next/router";
 
 const ThanksPage = () => {
