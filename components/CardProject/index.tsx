@@ -5,7 +5,6 @@ import mock from "utility/mock-api.json";
 import { formatterCop } from "utility/formatCurrency";
 import { useStyles } from "./styles";
 import ViewerImages from "components/ViewerImages";
-// import SwipeableTextMobileStepper from "../ViewerImages/index";
 
 const CardProject = ({
   Nombre,

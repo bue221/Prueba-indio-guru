@@ -6,9 +6,7 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 
-import { images as imagesDefault } from "./images";
-
-function ViewerImages({ images = imagesDefault }: { images: string[] }) {
+function ViewerImages({ images }: { images: string[] }) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = images.length;
